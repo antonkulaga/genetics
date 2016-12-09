@@ -9,59 +9,21 @@ case class CrossDep(
 object Dependencies {
 
   lazy val testing: Def.Initialize[Seq[ModuleID]] = Def.setting(Seq(
-		"org.scalatest" %%% "scalatest" % Versions.scalaTest % Test
+		"org.scalatest" %%% "scalatest" % "3.0.1" % Test
   ))
 
-	val semantic = CrossDep(
-		shared = Def.setting(	Seq("org.w3" %%% "banana-plantain" % Versions.bananaRdf) )
+	lazy val expressions = CrossDep(
+		shared = Def.setting(
+			Seq(
+			"com.github.marklister" %%% "product-collections" % "1.4.5"
+			)
+		),
+		jvm = Def.setting(
+			Seq(
+				"com.iheart" %% "ficus" % "1.4.0"
+			)
+		)
 	)
-
-
-	lazy val otherJVM = Def.setting(Seq(
-		"org.seleniumhq.selenium" % "selenium-java" % Versions.seleniumJava % Test,
-
-		"com.iheart" %% "ficus" % Versions.ficus,
-
-		"com.github.pathikrit"  %% "better-files-akka"  % Versions.betterFiles,
-
-		"com.vmunier" %% "scalajs-scripts" % Versions.scalaJSscripts
-	))
-
-
-
-	// akka-related libs
-	lazy val akka = Def.setting(Seq(
-
-		"org.denigma" %% "akka-http-extensions" % Versions.akkaHttpExtensions,
-
-		"com.typesafe.akka" %% "akka-stream" % Versions.akka,
-
-		"com.typesafe.akka" %% "akka-http-testkit" % Versions.akkaHttp % Test
-
-	))
-
-
-	// dependencies on javascript libs
-	lazy val webjars= Def.setting(Seq(
-
-		"org.webjars" % "Semantic-UI" %  Versions.semanticUI,
-
-		"org.webjars" % "codemirror" % Versions.codemirror,
-
-		"org.webjars" % "jquery" % Versions.jquery,
-
-		"org.webjars" % "three.js" % Versions.threeJS,
-
-		"org.webjars" % "webcomponentsjs" % Versions.webcomponents
-	))
-
-	// common purpose libs
-	lazy val styles: Def.Initialize[Seq[ModuleID]] = Def.setting(Seq(
-		"com.github.japgolly.scalacss" %%% "core" % Versions.scalaCSS,
-
-		"com.github.japgolly.scalacss" %%% "ext-scalatags" %  Versions.scalaCSS
-	))
-
 
 }
 

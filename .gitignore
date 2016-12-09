@@ -13,6 +13,8 @@ src_managed/
 project/boot/
 project/plugins/project/
 .idea
+.idea/*
+*.sc
 
 # Scala-IDE specific
 .scala_dependencies
@@ -33,3 +35,5 @@ tags
 
 #MAC OS specific
 .DS_Store
+
+files/test/*

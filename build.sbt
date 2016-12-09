@@ -12,14 +12,14 @@ lazy val publishSettings = Seq(
   bintrayRepository := "denigma-releases",
   bintrayOrganization := Some("denigma"),
   licenses += ("MPL-2.0", url("http://opensource.org/licenses/MPL-2.0")),
-  bintrayPublishIvyStyle := true,
-  scalaVersion := Versions.scala
+  bintrayPublishIvyStyle := true
 )
 
 
 //settings for all the projects
 lazy val commonSettings = Seq(
-  scalaVersion := Versions.scala,
+  scalaVersion :=  "2.12.1",
+  version := "0.0.1",
   organization := "org.denigma",
   scalacOptions ++= Seq( "-feature", "-language:_" ),
   javacOptions ++= Seq("-encoding", "UTF-8"),
@@ -37,14 +37,16 @@ lazy val expressions = crossProject
   .settings(commonSettings ++ publishSettings: _*)
   .settings(
     name := "expressions",
-    version := Versions.expressions
+    libraryDependencies ++= Dependencies.expressions.shared.value
   ).disablePlugins(RevolverPlugin)
   .jsConfigure(p => p.enablePlugins(ScalaJSWeb))
   .jsSettings(
+    libraryDependencies ++= Dependencies.expressions.js.value,
     persistLauncher in Compile := true,
     persistLauncher in Test := false
   )
   .jvmSettings(
+    libraryDependencies ++= Dependencies.expressions.jvm.value,
     (emitSourceMaps in fullOptJS) := true
   )
 
@@ -54,7 +56,6 @@ lazy val expressionsJS = expressions.js
 lazy val root = Project("root",file("."),settings = commonSettings)
   .settings(
     name := "root",
-    version := Versions.expressions,
     mainClass in Compile := Some("org.denigma.genetics.Main"),
     maintainer := "Anton Kulaga <antonkulaga@gmail.com>",
     packageSummary := "kappa-notebook",

@@ -15,7 +15,8 @@ object Dependencies {
 	lazy val expressions = CrossDep(
 		shared = Def.setting(
 			Seq(
-			"com.github.marklister" %%% "product-collections" % "1.4.5"
+			"com.github.marklister" %%% "product-collections" % "1.4.5",
+			"com.lihaoyi" %%% "pprint" % "0.4.4"
 			)
 		),
 		jvm = Def.setting(
